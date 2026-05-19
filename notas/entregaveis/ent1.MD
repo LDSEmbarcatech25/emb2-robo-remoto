@@ -41,40 +41,62 @@ A alocação de pinos foi projetada para evitar conflitos de barramento, respeit
 r;
 
 *** Fluxo de rede;
-[ DISPOSITIVO DO OPERADOR ]
-                           [   (Smartphone / PC)     ]
-                                       ^
-                                       |  Rede Wi-Fi (SoftAP)
-                                       v  (WebSockets / HTTP / Stream MJPEG)
-                                       
-  +------------------+         +------------------+         +------------------+
-  |  Sensor VL53L0X  |         |  Câmera OV5640   |         |  Sensor MPU6050  |
-  |  (Laser ToF /    |         | (Streaming Local)|         | (Giroscópio /    |
-  |   Anticolisão)   |         +--------+---------+         |  Acelerômetro)   |
-  +--------+---------+                  ^                   +--------+---------+
-           ^                            |                            ^
-           | Sinal I2C                  | Dados: Paralelo            | Sinal I2C0
-           | (Distância Segura)         | Controle: I2C              | (Grau de Inclinação)
-           v                            v                            v
-    +------+---------------------------------------------------------+------+
-    |                            ESP32-S3                            |      |
-    |                       (Placa KIIRA V2.0)                       |      |
-    +------+-------------------------+-------------------------------+------+
-           ^                         ^                               
-           |                         |  Sinal Digital / PWM          
-           |                         v  (Direção e Velocidade)                             
-           |                +------------------+             
-[ Energia Limpa 3.3V ]      |  Driver Ponte H  |             
-(Filtrada pela Placa)       |  (TB6612FNG)     |                 
-           ^                +--------+---------+                 
-           |                         |                           
-           | (Bifurcação de Energia) | Tensão Bruta (Acionamento)
-  +--------+---------+               v                           
-  |  BATERIA 18650   |================================> +------------------+
-  | (1 Célula 3.7V)  |                                  | Motores DC N20   |
-  | (Fonte Primária) |                                  | (Tração / Esteira)
-  +------------------+                                  +------------------+
 
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                        DISPOSITIVO DO OPERADOR                              │
+│                            (Smartphone / PC)                                │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      ▲
+                                      │ Rede Wi-Fi (SoftAP)
+                                      │ WebSockets / HTTP / Stream MJPEG
+                                      ▼
+
+      ┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
+      │  Sensor VL53L0X  │      │  Câmera OV5640   │      │  Sensor MPU6050  │
+      │ (Laser ToF /     │      │ (Streaming Local)│      │ (Giroscópio /    │
+      │  Anticolisão)    │      └────────┬─────────┘      │  Acelerômetro)   │
+      └────────┬─────────┘               │                └────────┬─────────┘
+               │ I2C                     │ Paralelo + I2C                   │ I2C
+               │ Distância Segura        │ Vídeo + Controle                 │ Inclinação
+               ▼                         ▼                                  ▼
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                  ESP32-S3                                   │
+│                              (Placa KIIRA     )                             │
+└───────────────────────────────┬──────────────────────────────────────────────┘
+                                │
+                                │ PWM / Sinal Digital
+                                │ Direção e Velocidade
+                                ▼
+
+                       ┌──────────────────────┐
+                       │  Driver Ponte H      │
+                       │    (TB6612FNG)       │
+                       └──────────┬───────────┘
+                                  │
+                                  │ Tensão de Acionamento
+                                  ▼
+
+                       ┌──────────────────────┐
+                       │   Motores DC         │
+                       │                      │
+                       └──────────────────────┘
+
+
+┌──────────────────────┐
+│   BATERIA 18650      │
+│  (1 célula 3.7V)     │
+│  Fonte Primária      │
+└──────────┬───────────┘
+           │
+           │ Alimentação
+           ├──────────────────────────────────────────────► Driver TB6612FNG
+           │
+           ▼
+┌──────────────────────┐
+│ Energia Limpa 3.3V   │
+│ (Filtrada pela placa)│
+└──────────────────────┘
 
 * **3. Especificação da Interface Web e Protocolos IoT:**
     * **Arquitetura da Página Web:** Esboço simples da interface do usuário (Wireframe/Layout da Dashboard Web), mostrando onde ficará a tela de vídeo da câmera, os botões de controle de direção e os indicadores visuais do sensor de distância e alertas de inclinação.
