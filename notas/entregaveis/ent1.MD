@@ -122,6 +122,7 @@ r;
     * **Modelagem do Payload de Comando:** Definição do formato de string ou caractere enviado pela página ao pressionar cada botão de direção (ex: Comando 'F' para frente, 'B' para trás, 'L' para esquerda, 'R' para direita, 'S' para parar).
 
 r;
+
 *** Arquitetura da Página Web;
 
 *** Estratégia de Controle Remoto;
