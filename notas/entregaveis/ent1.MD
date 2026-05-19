@@ -101,10 +101,7 @@ r;
 |   Alimentacao ESP32  |
 +----------------------+
 
-
-´´´ 
-
-
+```text
 
 
 * **3. Especificação da Interface Web e Protocolos IoT:**
