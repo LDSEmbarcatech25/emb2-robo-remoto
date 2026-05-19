@@ -16,8 +16,6 @@ r:
 
 *** Pinout (Tabela de GPIOs);
 
-A alocação de pinos foi projetada para evitar conflitos de barramento, respeitando o mapeamento nativo da placa KIIRA e expandindo para os atuadores externos.
-
 | Componente / Função | Pinos (ESP32-S3) | Barramento / Tipo de Sinal | Notas Técnicas |
 | :--- | :--- | :--- | :--- |
 | **Câmera OV5640 (Dados)** | GPIOs 16, 17, 18, 12, 10, 8, 9, 11 | Paralelo (Y9-Y2) | Barramento de dados da imagem. |
@@ -39,6 +37,9 @@ A alocação de pinos foi projetada para evitar conflitos de barramento, respeit
     * **Fluxo de rede:** Seta bidirecional representando a conexão Wi-Fi trocando pacotes WebSockets/HTTP com o dispositivo móvel ou PC do operador.
 
 r;
+*** Setas In e Setas Out 
+
+
 
 *** Fluxo de rede;
 
@@ -79,8 +80,6 @@ r;
                             |
                             | Potencia
                             v
-
-
                  +----------------------+
                  |      Motores DC      |
                  +----------------------+
@@ -106,3 +105,11 @@ r;
     * **Arquitetura da Página Web:** Esboço simples da interface do usuário (Wireframe/Layout da Dashboard Web), mostrando onde ficará a tela de vídeo da câmera, os botões de controle de direção e os indicadores visuais do sensor de distância e alertas de inclinação.
     * **Estratégia de Controle Remoto:** Justificativa da escolha do método de comunicação (ex: por que o uso de WebSockets reduzirá o atraso entre o comando do usuário e a resposta física do robô, comparado ao HTTP tradicional).
     * **Modelagem do Payload de Comando:** Definição do formato de string ou caractere enviado pela página ao pressionar cada botão de direção (ex: Comando 'F' para frente, 'B' para trás, 'L' para esquerda, 'R' para direita, 'S' para parar).
+
+r;
+*** Arquitetura da Página Web;
+
+*** Estratégia de Controle Remoto;
+
+*** Modelagem do Payload de Comando;
+
