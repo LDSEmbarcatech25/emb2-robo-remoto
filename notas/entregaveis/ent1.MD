@@ -29,6 +29,18 @@ r:
 
 *** Alimentação do Sistema; 
 
+```text
++---> [ Kiira: Regulador 3.3V ] ---> ESP32-S3 / Câmera / Sensores
+                      |
+[ Bateria 18650 ] ----+  (Nó de Bifurcação VCC)
+ (3.7V - 4.2V)        |
+                      +---> [ Capacitor Eletrolítico ]
+                      |
+                      +---> [ Ponte H: Pino VMOT ] ------> Motores DC
+                      
+* O GND de todos os módulos retorna para o negativo da bateria.
+
+```
 
 
 * **2. Diagrama de Blocos do Sistema:** Apresentar um esquema gráfico modular do hardware. No centro deve figurar o microcontrolador ESP32-S3 e, ao redor, blocos conectados por setas indicando o fluxo de sinal:
