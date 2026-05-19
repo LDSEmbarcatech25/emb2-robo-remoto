@@ -30,9 +30,10 @@ r:
 *** Alimentação do Sistema; 
 
 ```text
-+---> [ Kiira: Regulador 3.3V ] ---> ESP32-S3 / Câmera / Sensores
+
+                      +---> [ Kiira: Regulador 3.3V ] ---> ESP32-S3 / Câmera / Sensores
                       |
-[ Bateria 18650 ] ----+  (Nó de Bifurcação VCC)
+[ Bateria 18650 ] ----+--  (Nó de Bifurcação VCC)
  (3.7V - 4.2V)        |
                       +---> [ Capacitor Eletrolítico ]
                       |
