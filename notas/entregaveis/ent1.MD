@@ -101,8 +101,7 @@ r;
 |   Alimentacao ESP32  |
 +----------------------+
 
-´´´text
-
+```
 
 * **3. Especificação da Interface Web e Protocolos IoT:**
     * **Arquitetura da Página Web:** Esboço simples da interface do usuário (Wireframe/Layout da Dashboard Web), mostrando onde ficará a tela de vídeo da câmera, os botões de controle de direção e os indicadores visuais do sensor de distância e alertas de inclinação.
