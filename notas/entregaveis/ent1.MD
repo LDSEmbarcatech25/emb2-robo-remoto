@@ -1,6 +1,4 @@
-## Entregável Inicial: Documento de Arquitetura e Viabilidade Técnica
-
-Antes de iniciar o desenvolvimento prático do firmware ou a modelagem 3D do chassi, a equipe deverá entregar um relatório técnico de arquitetura contendo obrigatoriamente:
+## Relatório técnico de arquitetura - Entregável Inicial: Documento de Arquitetura e Viabilidade Técnica
 
 * **1. Mapeamento de Hardware e Componentes:** A equipe deve mapear os recursos da placa e os componentes externos do robô:
     * **Identificação:** Modelos exatos dos motores, do driver de motor (ponte H), do sensor de inclinação, do sensor de distância laser, do display (se utilizado localmente) e da câmera.
@@ -34,10 +32,49 @@ A alocação de pinos foi projetada para evitar conflitos de barramento, respeit
 *** Alimentação do Sistema; 
 
 
+
 * **2. Diagrama de Blocos do Sistema:** Apresentar um esquema gráfico modular do hardware. No centro deve figurar o microcontrolador ESP32-S3 e, ao redor, blocos conectados por setas indicando o fluxo de sinal:
     * **Setas de entrada (In):** Sensor de distância, Sensor de inclinação e Câmera apontando para o ESP32-S3.
     * **Setas de saída (Out):** ESP32-S3 apontando para o Driver de Motores (Ponte H), que por sua vez se conecta às Rodas.
     * **Fluxo de rede:** Seta bidirecional representando a conexão Wi-Fi trocando pacotes WebSockets/HTTP com o dispositivo móvel ou PC do operador.
+
+r;
+
+*** Fluxo de rede;
+[ DISPOSITIVO DO OPERADOR ]
+                           [   (Smartphone / PC)     ]
+                                       ^
+                                       |  Rede Wi-Fi (SoftAP)
+                                       v  (WebSockets / HTTP / Stream MJPEG)
+                                       
+  +------------------+         +------------------+         +------------------+
+  |  Sensor VL53L0X  |         |  Câmera OV5640   |         |  Sensor MPU6050  |
+  |  (Laser ToF /    |         | (Streaming Local)|         | (Giroscópio /    |
+  |   Anticolisão)   |         +--------+---------+         |  Acelerômetro)   |
+  +--------+---------+                  ^                   +--------+---------+
+           ^                            |                            ^
+           | Sinal I2C                  | Dados: Paralelo            | Sinal I2C0
+           | (Distância Segura)         | Controle: I2C              | (Grau de Inclinação)
+           v                            v                            v
+    +------+---------------------------------------------------------+------+
+    |                            ESP32-S3                            |      |
+    |                       (Placa KIIRA V2.0)                       |      |
+    +------+-------------------------+-------------------------------+------+
+           ^                         ^                               
+           |                         |  Sinal Digital / PWM          
+           |                         v  (Direção e Velocidade)                             
+           |                +------------------+             
+[ Energia Limpa 3.3V ]      |  Driver Ponte H  |             
+(Filtrada pela Placa)       |  (TB6612FNG)     |                 
+           ^                +--------+---------+                 
+           |                         |                           
+           | (Bifurcação de Energia) | Tensão Bruta (Acionamento)
+  +--------+---------+               v                           
+  |  BATERIA 18650   |================================> +------------------+
+  | (1 Célula 3.7V)  |                                  | Motores DC N20   |
+  | (Fonte Primária) |                                  | (Tração / Esteira)
+  +------------------+                                  +------------------+
+
 
 * **3. Especificação da Interface Web e Protocolos IoT:**
     * **Arquitetura da Página Web:** Esboço simples da interface do usuário (Wireframe/Layout da Dashboard Web), mostrando onde ficará a tela de vídeo da câmera, os botões de controle de direção e os indicadores visuais do sensor de distância e alertas de inclinação.
