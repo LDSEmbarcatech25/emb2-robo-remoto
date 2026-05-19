@@ -1,3 +1,4 @@
+```text
 Estrutura do projeto
 
 robo_remoto/
@@ -55,4 +56,4 @@ robo_remoto/
 │
 ├── build/                   # compilação
 ├── partitions.csv           # ESP32 partitions
-└── platformio.ini (ou CMakeLists.txt)
+└── platformio.ini (ou CMakeLists.txt)  
