@@ -3,6 +3,10 @@ Estrutura do projeto
 
 robo_remoto/
 │
+├── notas/                  # pasta para guardar nossas pesquisas e entregáveis
+│   ├── anotacoes/              # pasta com brainstorms sobre o projeto
+│   ├── entregaveis/              # entregaveis/relatórios
+│ 
 ├── include/                  # headers (definições)
 │   ├── pinout.h              # GPIOs físicos
 │   ├── config.h              # parâmetros do sistema
