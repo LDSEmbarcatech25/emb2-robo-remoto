@@ -180,6 +180,11 @@
   <p><i>Figura: Representação visual da tela inicial.</i></p>
 </div>
 
+<div align="center">
+  <img src="images/future2.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela de transmissão.</i></p>
+</div>
+
 
 
 *** Estratégia de Controle Remoto;
