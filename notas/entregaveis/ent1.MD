@@ -4,7 +4,9 @@
     * **Identificação:** Modelos exatos dos motores, do driver de motor (ponte H), do sensor de inclinação, do sensor de distância laser, do display (se utilizado localmente) e da câmera.
     * **Pinout (Tabela de GPIOs):** Tabela detalhada especificando quais pinos do ESP32-S3 controlam a direção e a velocidade dos motores (pinos de saída) e quais pinos recebem os dados dos sensores e da câmera.
     * **Alimentação do Sistema:** Como os motores consomem muita corrente, a equipe deve detalhar como será feita a separação ou filtragem da alimentação das baterias entre a parte lógica (ESP32-S3) e a parte de potência (motores), evitando que o microcontrolador reinicie devido a ruídos elétricos ou quedas de tensão no arranque dos motores.
-r:
+
+* **r:**
+
 *** Identificação;
 - Esp32s3, placa Kiira
 - Câmera, OV5640, já na Kiira
@@ -49,8 +51,12 @@ r:
     * **Setas de saída (Out):** ESP32-S3 apontando para o Driver de Motores (Ponte H), que por sua vez se conecta às Rodas.
     * **Fluxo de rede:** Seta bidirecional representando a conexão Wi-Fi trocando pacotes WebSockets/HTTP com o dispositivo móvel ou PC do operador.
 
-r;
-*** Setas In e Setas Out 
+* **r;**
+*** Setas In 
+
+
+
+*** Setas Out 
 
 
 
@@ -121,7 +127,7 @@ r;
     * **Estratégia de Controle Remoto:** Justificativa da escolha do método de comunicação (ex: por que o uso de WebSockets reduzirá o atraso entre o comando do usuário e a resposta física do robô, comparado ao HTTP tradicional).
     * **Modelagem do Payload de Comando:** Definição do formato de string ou caractere enviado pela página ao pressionar cada botão de direção (ex: Comando 'F' para frente, 'B' para trás, 'L' para esquerda, 'R' para direita, 'S' para parar).
 
-r;
+* **r;**
 
 *** Arquitetura da Página Web;
 
