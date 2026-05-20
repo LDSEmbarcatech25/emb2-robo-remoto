@@ -6,3 +6,5 @@ https://www.figma.com/design/IJ0J6jOAZVv9Cz4JdS1N3e/desktop?node-id=4-308&t=nv6r
 
 
 ## mobile: 
+
+https://www.figma.com/design/rxrCNoEg4d2tsJT3ggMQer/Mobile-version?node-id=0-1&t=iugvQ9j63AjjpfZT-1
