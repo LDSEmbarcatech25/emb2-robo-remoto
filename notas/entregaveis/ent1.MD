@@ -45,7 +45,6 @@
 
 ```
 
-
 * **2. Diagrama de Blocos do Sistema:** Apresentar um esquema gráfico modular do hardware. No centro deve figurar o microcontrolador ESP32-S3 e, ao redor, blocos conectados por setas indicando o fluxo de sinal:
     * **Setas de entrada (In):** Sensor de distância, Sensor de inclinação e Câmera apontando para o ESP32-S3.
     * **Setas de saída (Out):** ESP32-S3 apontando para o Driver de Motores (Ponte H), que por sua vez se conecta às Rodas.
@@ -53,13 +52,51 @@
 
 * **r;**
 
-*** Setas In 
+*** Setas In e Setas OUT
 
+```text
 
+[ Sensor de Distância (Laser ToF) ]
+                              |
+                              | Sinal (In)
+                              v
+ [ Câmera ]              +----------+              [ Sensor de Inclinação ]
+ [ Óptica ] ---(In)----> | ESP32-S3 | <---(In)---- [ (Giroscópio/Acel.)   ]
+                         +----------+
+                           |      |
+                 Sinal PWM |      | Link Bidirecional (Wi-Fi)
+                     (Out) |      | (WebSockets / protocolo)
+                           v      v
+              [ Driver de Motores ]    [ Interface do Operador ]
+              [ (Ponte H / Rodas) ]    [ (Página Web / Mobile) ]
 
-*** Setas Out 
+```
 
+```text
 
+                               [ Interface do Operador ]
+                                 [  (Web / Smartphone)   ]
+                                            ^
+                                            | Link Bidirecional (Wi-Fi)
+                                            | (protocolos)
+                                            v
+                                      +----------+
+ [ Sensor de Distância ] ----(In)---> |          |
+ [      (Laser    )    ]              |          |
+                                      |          |
+ [ Sensor de Inclinação] ----(In)---> | ESP32-S3 |
+ [ (Giroscópio/Acel.)  ]              | (Centro) |
+                                      |          |         Sinais de Controle (PWM/Digital)
+ [       Câmera        ] ----(In)---> |          | ---(Out)---> [ Driver de Motores ]
+ [      (Óptica)       ]              |          |              [     (Ponte H)     ]
+                                      +----------+                     |
+                                                                       |
+                                                                       | Energia / Potência
+                                                                       v
+                                                                [ Tração Mecânica ]
+                                                                [ (Motores / Rodas) ]
+
+```
 
 *** Fluxo de rede;
 ```text
