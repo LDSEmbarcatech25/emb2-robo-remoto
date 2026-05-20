@@ -168,6 +168,11 @@
 * **r;**
 
 *** Arquitetura da Página Web;
+***/ DESKTOP/
+
+
+
+
 
 *** Estratégia de Controle Remoto;
 
