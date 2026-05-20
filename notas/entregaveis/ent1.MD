@@ -52,6 +52,7 @@
     * **Fluxo de rede:** Seta bidirecional representando a conexão Wi-Fi trocando pacotes WebSockets/HTTP com o dispositivo móvel ou PC do operador.
 
 * **r;**
+
 *** Setas In 
 
 
