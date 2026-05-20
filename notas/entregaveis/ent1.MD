@@ -170,7 +170,15 @@
 *** Arquitetura da Página Web;
 ***/ DESKTOP/
 
+<div align="center">
+  <img src="images/future0.png" alt="tela de login" width="700">
+  <p><i>Figura: Representação visual da tela de login.</i></p>
+</div>
 
+<div align="center">
+  <img src="images/future1.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela inicial.</i></p>
+</div>
 
 
 
