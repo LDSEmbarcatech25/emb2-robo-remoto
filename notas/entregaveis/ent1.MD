@@ -208,7 +208,7 @@
 </div>
 
 <div align="center">
-  <img src="images/feature7.png" alt="Tela inicial" width="300">
+  <img src="images/feature7.png" alt="Tela inicial" width="600">
   <p><i>Figura: Representação visual da tela individual de transmissão, versão 2.</i></p>
 </div>
 
