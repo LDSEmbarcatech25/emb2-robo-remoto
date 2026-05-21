@@ -193,27 +193,27 @@
 ***/ MOBILE/
 
 <div align="center">
-  <img src="images/feature4.png" alt="Tela inicial" width="700">
+  <img src="images/feature4.png" alt="Tela inicial" width="300">
   <p><i>Figura: Representação visual da tela de login.</i></p>
 </div>
 
 <div align="center">
-  <img src="images/feature5.png" alt="Tela inicial" width="700">
+  <img src="images/feature5.png" alt="Tela inicial" width="300">
   <p><i>Figura: Representação visual da tela de inicio.</i></p>
 </div>
 
 <div align="center">
-  <img src="images/feature6.png" alt="Tela inicial" width="700">
+  <img src="images/feature6.png" alt="Tela inicial" width="300">
   <p><i>Figura: Representação visual da tela individual de transmissão.</i></p>
 </div>
 
 <div align="center">
-  <img src="images/feature7.png" alt="Tela inicial" width="700">
+  <img src="images/feature7.png" alt="Tela inicial" width="300">
   <p><i>Figura: Representação visual da tela individual de transmissão, versão 2.</i></p>
 </div>
 
 <div align="center">
-  <img src="images/feature8.png" alt="Tela inicial" width="700">
+  <img src="images/feature8.png" alt="Tela inicial" width="300">
   <p><i>Figura: Representação visual da tela de cadastro de IP.</i></p>
 </div>
 
