@@ -185,7 +185,10 @@
   <p><i>Figura: Representação visual da tela de transmissão.</i></p>
 </div>
 
-
+<div align="center">
+  <img src="images/future3.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela de cadastro de um novo robô.</i></p>
+</div>
 
 *** Estratégia de Controle Remoto;
 
