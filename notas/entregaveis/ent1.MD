@@ -190,6 +190,34 @@
   <p><i>Figura: Representação visual da tela de cadastro de um novo robô.</i></p>
 </div>
 
+***/ MOBILE/
+
+<div align="center">
+  <img src="images/future4.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela de login.</i></p>
+</div>
+
+<div align="center">
+  <img src="images/future5.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela de inicio.</i></p>
+</div>
+
+<div align="center">
+  <img src="images/future6.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela individual de transmissão.</i></p>
+</div>
+
+<div align="center">
+  <img src="images/future7.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela individual de transmissão, versão 2.</i></p>
+</div>
+
+<div align="center">
+  <img src="images/future8.png" alt="Tela inicial" width="700">
+  <p><i>Figura: Representação visual da tela de cadastro de IP.</i></p>
+</div>
+
+
 *** Estratégia de Controle Remoto;
 
 A escolha dos WebSockets no controle remoto do robô foi feita porque eles deixam a comunicação mais rápida e estável se comparada ao HTTP tradicional. No HTTP, cada comando enviado pelo operador precisa abrir e fechar uma conexão nova, isso gera atraso e deixa a movimentação menos precisa. Já o WebSocket mantém uma conexão contínua aberta, permitindo que os comandos sejam enviados quase em tempo real, com latência de poucos milissegundos.
