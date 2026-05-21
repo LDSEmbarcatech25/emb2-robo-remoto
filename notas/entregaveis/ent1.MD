@@ -192,5 +192,8 @@
 
 *** Estratégia de Controle Remoto;
 
+A escolha dos WebSockets no controle remoto do robô foi feita porque eles deixam a comunicação mais rápida e estável se comparada ao HTTP tradicional. No HTTP, cada comando enviado pelo operador precisa abrir e fechar uma conexão nova, isso gera atraso e deixa a movimentação menos precisa. Já o WebSocket mantém uma conexão contínua aberta, permitindo que os comandos sejam enviados quase em tempo real, com latência de poucos milissegundos.
+Existindo ainda outra vantagens, como a comunicação ser em mão dupla, tanto a operação de controle enviando o sinal quanto o robô enviando as informações, e o menor consumo de banda da rede, o que ajuda na transmissão ao vivo. 
+
 *** Modelagem do Payload de Comando;
 
