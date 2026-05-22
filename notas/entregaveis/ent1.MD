@@ -225,3 +225,15 @@ Existindo ainda outra vantagens, como a comunicação ser em mão dupla, tanto a
 
 *** Modelagem do Payload de Comando;
 
+A comunicação entre a interface web e o ESP32-S3 será baseada no envio de mensagens simples e de baixa latência via WebSockets. Para garantir eficiência e facilidade de interpretação no firmware em C, será adotado um protocolo de comandos em formato de caractere único.
+
+Cada ação do usuário na interface (botões de direção) será convertida em um caractere enviado ao robô, conforme a seguinte tabela:
+
+F → Movimento para frente
+B → Movimento para trás
+L → Rotação para a esquerda
+R → Rotação para a direita
+S → Parada imediata
+
+Esse modelo reduz o tamanho das mensagens transmitidas, minimizando o atraso na comunicação e simplificando o processamento no microcontrolador. O firmware do ESP32-S3 apenas interpreta o caractere recebido e executa a ação correspondente nos motores em tempo real.
+
