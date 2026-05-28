@@ -19,9 +19,61 @@ extern const unsigned char style_css_end[]   asm("_binary_style_css_end");
 extern const unsigned char app_js_start[] asm("_binary_app_js_start");
 extern const unsigned char app_js_end[]   asm("_binary_app_js_end");
 
-
 static const char *TAG = "WEBSERVER";
 
+//handler websocket voltando
+static esp_err_t ws_handler(httpd_req_t *req)
+{
+    // handshake
+    if (req->method == HTTP_GET)
+    {
+        ESP_LOGI(TAG, "WebSocket conectado");
+
+        return ESP_OK;
+    }
+
+    httpd_ws_frame_t ws_pkt;
+
+    memset(&ws_pkt, 0, sizeof(ws_pkt));
+
+    ws_pkt.type = HTTPD_WS_TYPE_TEXT;
+
+    esp_err_t ret =
+        httpd_ws_recv_frame(req, &ws_pkt, 0);
+
+    if (ret != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Erro recebendo frame");
+
+        return ret;
+    }
+
+    if (ws_pkt.len > 0)
+    {
+        uint8_t *buf = calloc(1, ws_pkt.len + 1);
+
+        ws_pkt.payload = buf;
+
+        ret = httpd_ws_recv_frame(
+            req,
+            &ws_pkt,
+            ws_pkt.len
+        );
+
+        if (ret == ESP_OK)
+        {
+            ESP_LOGI(
+                TAG,
+                "COMANDO: %s",
+                (char*)ws_pkt.payload
+            );
+        }
+
+        free(buf);
+    }
+
+    return ESP_OK;
+}
 
 //http index handler
 static esp_err_t index_handler(httpd_req_t *req)
@@ -68,60 +120,30 @@ static esp_err_t js_handler(httpd_req_t *req)
 
 static esp_err_t stream_handler(httpd_req_t *req)
 {
-    camera_fb_t *fb = NULL;
-    char header[128];
+    camera_fb_t *fb = esp_camera_fb_get();
 
-    httpd_resp_set_type(
-        req,
-        "multipart/x-mixed-replace; boundary=frame"
-    );
-
-    while (true)
+    if (!fb)
     {
-        fb = esp_camera_fb_get();
+        ESP_LOGE(TAG, "Falha captura frame");
 
-        if (!fb)
-        {
-            ESP_LOGE(TAG, "Falha captura frame");
-            continue;
-        }
+        httpd_resp_send_500(req);
 
-        int len = snprintf(
-            header,
-            sizeof(header),
-            "--frame\r\n"
-            "Content-Type: image/jpeg\r\n"
-            "Content-Length: %u\r\n\r\n",
-            fb->len
-        );
-
-        if (httpd_resp_send_chunk(req, header, len) != ESP_OK)
-        {
-            esp_camera_fb_return(fb);
-            break;
-        }
-
-        if (httpd_resp_send_chunk(
-                req,
-                (const char *)fb->buf,
-                fb->len) != ESP_OK)
-        {
-            esp_camera_fb_return(fb);
-            break;
-        }
-
-        if (httpd_resp_send_chunk(req, "\r\n", 2) != ESP_OK)
-        {
-            esp_camera_fb_return(fb);
-            break;
-        }
-
-        esp_camera_fb_return(fb);
-
-        vTaskDelay(pdMS_TO_TICKS(50));
+        return ESP_FAIL;
     }
 
-    return ESP_OK;
+    httpd_resp_set_type(req, "image/jpeg");
+
+    httpd_resp_set_hdr(req, "Cache-Control", "no-cache");
+
+    esp_err_t res = httpd_resp_send(
+        req,
+        (const char *)fb->buf,
+        fb->len
+    );
+
+    esp_camera_fb_return(fb);
+
+    return res;
 }
 
 //webserver
@@ -161,10 +183,21 @@ static httpd_handle_t start_webserver(void)
             .user_ctx = NULL
         };
 
+        httpd_uri_t ws_uri = {
+            .uri = "/ws",
+            .method = HTTP_GET,
+            .handler = ws_handler,
+            .user_ctx = NULL,
+            .is_websocket = true
+        };
+
+
         httpd_register_uri_handler(server, &index_uri);
         httpd_register_uri_handler(server, &stream_uri);
         httpd_register_uri_handler(server,&css_uri);
         httpd_register_uri_handler(server,&js_uri);
+        httpd_register_uri_handler(server, &ws_uri);
+    
     }
 
     return server;
