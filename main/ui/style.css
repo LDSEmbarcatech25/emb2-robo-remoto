@@ -104,3 +104,36 @@ h1{
     background:rgba(0,176,255,0.35);
     box-shadow: 0 0 15px rgba(0,176,255,0.8);
 }
+
+#dashboard{
+    display: none;
+}
+
+#login{
+    display:flex;
+    text-align: center;
+    margin-top:100px;
+    align-items: center;
+    flex-direction: column;
+    gap:15px;
+}
+
+#login input{
+    width: 220px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 15px;
+}
+
+#login button{
+    padding: 10px 25px;
+    font-size: 18px;
+    border-radius: 15px;
+}
+
+
+h2{
+    color: black;
+    font-family:Arial, sans-serif;
+    padding: 60px;
+}

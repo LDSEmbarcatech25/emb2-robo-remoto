@@ -171,3 +171,28 @@ socket.onmessage = (event) => {
     }
 
 };
+
+const botaoLogin =
+    document.getElementById("entrar");
+
+botaoLogin.onclick = () => {
+
+    const senha =
+        document.getElementById("senha").value;
+
+    const usuario =
+        document.getElementById("usuario").value;
+
+    if(usuario=="admin" && senha == "1234")
+    {
+        document.getElementById("login")
+            .style.display = "none";
+
+        document.getElementById("dashboard")
+            .style.display = "block";
+    }
+    else
+    {
+        alert("Usuário ou senha incorretos");
+    }
+};
