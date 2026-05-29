@@ -55,9 +55,9 @@ esp_err_t camera_init(void){
 
         .frame_size = FRAMESIZE_QVGA,
 
-        .jpeg_quality = 20,
+        .jpeg_quality = 15,
 
-        .fb_count = 1,
+        .fb_count = 3,
 
         .grab_mode = CAMERA_GRAB_WHEN_EMPTY,
 

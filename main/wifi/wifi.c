@@ -13,6 +13,7 @@
 #define WIFI_PASSWORD "9tc6cgkpqtjg8eq"
 
 static const char *TAG = "WIFI";
+char ip_addr[16] = "0.0.0.0";
 
 //eventos wifi
 
@@ -53,8 +54,13 @@ static void wifi_event_handler(
         ESP_LOGI(
             TAG,
             "IP obtido: " IPSTR,
-            IP2STR(&event->ip_info.ip)
-        );
+            IP2STR(&event->ip_info.ip));
+
+        snprintf(
+            ip_addr,
+            sizeof(ip_addr),
+            IPSTR,
+            IP2STR(&event->ip_info.ip));
     }
 }
 
@@ -124,4 +130,6 @@ void wifi_init(void)
     );
 
     ESP_LOGI(TAG, "Conectando ao WiFi...");
+
+
 }

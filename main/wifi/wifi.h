@@ -3,4 +3,6 @@
 
     void wifi_init(void);
 
+    extern char ip_addr[16];
+
     #endif

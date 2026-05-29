@@ -6,12 +6,12 @@ function atualizarFrame()
 
     img.onload = () => {
 
-        setTimeout(atualizarFrame, 400);
+        setTimeout(atualizarFrame, 30);
     };
 
     img.onerror = () => {
 
-        setTimeout(atualizarFrame, 1000);
+        setTimeout(atualizarFrame, 100);
     };
 
     img.src = "/stream?t=" + Date.now();
@@ -24,24 +24,19 @@ const socket = new WebSocket(
 socket.onopen = () => {
 
     console.log("WS CONECTADO");
-
-    alert("WS CONECTADO");
-
+    document.body.focus();
     atualizarFrame();
 };
 
 socket.onerror = (e) => {
 
     console.log("ERRO WS", e);
-
-    alert("ERRO WS");
+    alert("Erro na conexão com o WebSocket");
 };
 
 socket.onclose = () => {
 
     console.log("WS FECHOU");
-
-    alert("WS FECHOU");
 };
 
 function enviar(cmd)
@@ -49,27 +44,130 @@ function enviar(cmd)
     if(socket.readyState === WebSocket.OPEN)
     {
         socket.send(cmd);
-
-        console.log("ENVIADO:", cmd);
+        console.log(cmd);
     }
 }
 
-document.getElementById("frente").onclick = () => {
+const frente = document.getElementById("frente");
+    frente.onmousedown = () => {
+        enviar("FRENTE");
+    }
+    frente.onmouseup = () => {
+        enviar("PARAR");
+    }
 
-    enviar("FRENTE");
-};
 
-document.getElementById("tras").onclick = () => {
+const tras =document.getElementById("tras");
+    tras.onmousedown = () => {
+        enviar("TRAS");
+    }
+    tras.onmouseup = () => { 
+        enviar("PARAR");
+    };
 
-    enviar("TRAS");
-};
-
-document.getElementById("esquerda").onclick = () => {
-
+const esquerda =document.getElementById("esquerda");
+    esquerda.onmousedown = () => {
     enviar("ESQUERDA");
+    }
+    esquerda.onmouseup = () => {
+    enviar("PARAR");
+    }   
+
+const direita = document.getElementById("direita");
+    direita.onmousedown = () => {
+    enviar("DIREITA");
+    }  
+    direita.onmouseup = () => {     
+    enviar("PARAR");
+    };
+
+
+document.addEventListener("keydown", (e) => {
+    if(e.repeat)
+        return;
+
+    console.log("TECLA:", e.key);
+
+    switch(e.key){
+        
+        case "w":
+        case "W":
+        case "ArrowUp":
+            enviar("FRENTE");
+            break;
+        
+        case "s":
+        case "S":
+        case "ArrowDown":
+            enviar("TRAS");
+            break;
+        
+        case "a":
+        case "A":
+        case "ArrowLeft":
+            enviar("ESQUERDA");
+            break;
+        
+        case "d":
+        case "D":
+        case "ArrowRight":
+            enviar("DIREITA");
+            break;
+    }
+});
+
+document.addEventListener("keyup",(e)=>{
+
+    switch(e.key){
+        case "w":
+        case "W":
+        case "ArrowUp":
+        
+        case "s":
+        case "S":
+        case "ArrowDown":
+
+        case "a":
+        case "A":
+        case "ArrowLeft":
+
+        case "d":
+        case "D":
+        case "ArrowRight":
+
+            enviar("PARAR");
+            break;
+    }
+});
+
+window.onload = function()
+{
+    document.body.focus();
 };
 
-document.getElementById("direita").onclick = () => {
+socket.onmessage = (event) => {
 
-    enviar("DIREITA");
+    console.log(event.data);
+
+    if(event.data.startsWith("Bateria:"))
+    {
+        document.getElementById("bateria")
+            .innerText =
+            event.data.replace("Bateria:", "");
+    }
+
+    if(event.data.startsWith("Velocidade:"))
+    {
+        document.getElementById("velocidade")
+            .innerText =
+            event.data.replace("Velocidade:", "");
+    }
+
+    if(event.data.startsWith("IP:"))
+    {
+        document.getElementById("ip")
+            .innerText =
+            event.data.replace("IP:", "");
+    }
+
 };

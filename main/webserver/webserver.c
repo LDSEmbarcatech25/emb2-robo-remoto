@@ -10,6 +10,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "motor/motor.h"
+#include "pwm/pwm.h"
+#include "bateria/bateria.h"
+#include "wifi/wifi.h"
+
 extern const unsigned char index_html_start[] asm("_binary_index_html_start");
 extern const unsigned char index_html_end[]   asm("_binary_index_html_end");
 
@@ -28,7 +33,6 @@ static esp_err_t ws_handler(httpd_req_t *req)
     if (req->method == HTTP_GET)
     {
         ESP_LOGI(TAG, "WebSocket conectado");
-
         return ESP_OK;
     }
 
@@ -44,7 +48,6 @@ static esp_err_t ws_handler(httpd_req_t *req)
     if (ret != ESP_OK)
     {
         ESP_LOGE(TAG, "Erro recebendo frame");
-
         return ret;
     }
 
@@ -68,6 +71,46 @@ static esp_err_t ws_handler(httpd_req_t *req)
                 (char*)ws_pkt.payload
             );
         }
+  
+        char *cmd = (char*)ws_pkt.payload;
+
+        if(strcmp(cmd, "FRENTE") == 0)
+        {
+            motor_frente();
+        }
+        else if(strcmp(cmd, "TRAS") == 0)
+        {
+            motor_tras();
+        }
+        else if(strcmp(cmd, "ESQUERDA") == 0)
+        {
+            motor_esquerda();
+        }
+        else if(strcmp(cmd, "DIREITA") == 0)
+        {
+            motor_direita();
+        }
+        else if(strcmp(cmd, "PARAR") == 0)
+        {
+            motor_parar();
+        }
+
+        int velocidade_cm = 0;
+
+        int bateria = bateria_percentual();
+
+        char resposta[64];
+        sprintf(resposta, "Velocidade:%d cm/s \n Bateria:%d%% \n IP:%s", velocidade_cm, bateria, ip_addr);
+
+        httpd_ws_frame_t ws_res ={
+            .final = true,
+            .fragmented = false,
+            .type = HTTPD_WS_TYPE_TEXT,
+            .payload = (uint8_t*)resposta,
+            .len = strlen(resposta)
+        };
+
+        httpd_ws_send_frame(req, &ws_res);
 
         free(buf);
     }
@@ -197,6 +240,7 @@ static httpd_handle_t start_webserver(void)
         httpd_register_uri_handler(server,&css_uri);
         httpd_register_uri_handler(server,&js_uri);
         httpd_register_uri_handler(server, &ws_uri);
+    
     
     }
 

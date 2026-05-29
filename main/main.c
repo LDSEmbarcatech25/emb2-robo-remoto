@@ -4,6 +4,9 @@
 #include "wifi/wifi.h"
 #include "camera/camera.h"
 #include "webserver/webserver.h"
+#include "pwm/pwm.h"
+#include "motor/motor.h"
+#include "bateria/bateria.h"
 
 //app main
 
@@ -20,6 +23,9 @@ void app_main(void)
     );
 
     webserver_start();
+    pwm_init();
+    motor_init();
+    bateria_init();
 
     while (1)
     {
