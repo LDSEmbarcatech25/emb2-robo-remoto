@@ -22,6 +22,7 @@ idf_component_register(
         "ui/index.html"
         "ui/style.css"
         "ui/app.js"
+        "ui/imagens/imagemcamera.jpg"
 
     REQUIRES
         esp_wifi

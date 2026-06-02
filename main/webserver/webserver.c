@@ -24,6 +24,9 @@ extern const unsigned char style_css_end[]   asm("_binary_style_css_end");
 extern const unsigned char app_js_start[] asm("_binary_app_js_start");
 extern const unsigned char app_js_end[]   asm("_binary_app_js_end");
 
+extern const unsigned char imagemcamera_jpg_start[] asm("_binary_imagemcamera_jpg_start");
+extern const unsigned char imagemcamera_jpg_end[] asm("_binary_imagemcamera_jpg_end");
+
 static const char *TAG = "WEBSERVER";
 
 //handler websocket voltando
@@ -189,6 +192,20 @@ static esp_err_t stream_handler(httpd_req_t *req)
     return res;
 }
 
+//handler da imagem de login
+static esp_err_t imagemcamera_handler(httpd_req_t *req)
+{
+    httpd_resp_set_type(req, "image/jpg");
+
+    httpd_resp_send(
+        req,
+        (const char *)imagemcamera_jpg_start,
+        imagemcamera_jpg_end - imagemcamera_jpg_start
+    );
+
+    return ESP_OK;
+}
+
 //webserver
 static httpd_handle_t start_webserver(void)
 {
@@ -234,13 +251,20 @@ static httpd_handle_t start_webserver(void)
             .is_websocket = true
         };
 
-
+        httpd_uri_t imagemcamera_uri = {
+            .uri = "/imagemcamera.jpg",
+            .method = HTTP_GET,
+            .handler = imagemcamera_handler,
+            .user_ctx = NULL
+        };
+        
         httpd_register_uri_handler(server, &index_uri);
         httpd_register_uri_handler(server, &stream_uri);
         httpd_register_uri_handler(server,&css_uri);
         httpd_register_uri_handler(server,&js_uri);
         httpd_register_uri_handler(server, &ws_uri);
-    
+        httpd_register_uri_handler(server, &imagemcamera_uri);
+        
     
     }
 

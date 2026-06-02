@@ -9,8 +9,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/event_groups.h"
 
-#define WIFI_SSID     "Galaxy S25 3499"
-#define WIFI_PASSWORD "9tc6cgkpqtjg8eq"
+#define WIFI_SSID     "ITSelf"
+#define WIFI_PASSWORD "code2020"
 
 static const char *TAG = "WIFI";
 char ip_addr[16] = "0.0.0.0";
