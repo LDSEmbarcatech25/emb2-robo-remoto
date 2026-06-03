@@ -11,7 +11,6 @@
 #define MOTOR2_IN2 21 //SCL
 #define MOTOR2_VEL 44
 
-int velocidade_pwm = 180;
 int velocidade_cm = 0;
 
 
@@ -34,7 +33,7 @@ void motor_init(void)
 
 void motor_frente(void)
 {
-    velocidade_cm = (velocidade_pwm * 80) / 255;
+    velocidade_cm = (120* 80) / 255;
     gpio_set_level(MOTOR1_IN1, 1);
     gpio_set_level(MOTOR1_IN2, 0);
 
@@ -47,7 +46,7 @@ void motor_frente(void)
 
 void motor_tras(void)
 {
-    velocidade_cm = (velocidade_pwm * 80) / 255;
+    velocidade_cm = (120 * 80) / 255;
     gpio_set_level(MOTOR1_IN1, 0);
     gpio_set_level(MOTOR1_IN2, 1);
 
@@ -60,7 +59,7 @@ void motor_tras(void)
 
 void motor_esquerda(void)
 {
-    velocidade_cm = (velocidade_pwm * 80) / 255;
+    velocidade_cm = (100 * 80) / 255;
     gpio_set_level(MOTOR1_IN1, 1);
     gpio_set_level(MOTOR1_IN2, 0);
 
@@ -73,7 +72,7 @@ void motor_esquerda(void)
 
 void motor_direita(void)
 {
-    velocidade_cm = (velocidade_pwm * 80) / 255;
+    velocidade_cm = (100 * 80) / 255;
     gpio_set_level(MOTOR1_IN1, 0);
     gpio_set_level(MOTOR1_IN2, 0);
 
