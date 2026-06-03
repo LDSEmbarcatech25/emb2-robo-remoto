@@ -98,8 +98,6 @@ static esp_err_t ws_handler(httpd_req_t *req)
             motor_parar();
         }
 
-        int velocidade_cm = 0;
-
         int bateria = bateria_percentual();
 
         char resposta[64];

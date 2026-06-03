@@ -183,7 +183,7 @@ botaoLogin.onclick = () => {
     const usuario =
         document.getElementById("usuario").value;
 
-    if(usuario=="admin" && senha == "1234")
+    if(usuario=="login" && senha == "1234")
     {
         document.getElementById("login")
             .style.display = "none";

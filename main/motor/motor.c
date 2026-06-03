@@ -86,7 +86,7 @@ void motor_direita(void)
 
 void motor_parar(void)
 {
-    velocidade_cm = (velocidade_pwm * 80) / 255;
+    velocidade_cm = 0;
     gpio_set_level(MOTOR1_IN1, 0);
     gpio_set_level(MOTOR1_IN2, 0);
 
