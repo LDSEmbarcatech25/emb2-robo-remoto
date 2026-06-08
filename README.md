@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PROJETO DE ENCERRAMENTO DE RESIDÊNCIA
 ### DISPOSITIVO IoT PARA EXPLORAÇÃO REMOTA E ROBÓTICA MÓVEL EM LOCAIS DE DIFÍCIL ACESSO
 
@@ -49,3 +50,31 @@ Antes de iniciar o desenvolvimento prático do firmware ou a modelagem 3D do cha
     * **Arquitetura da Página Web:** Esboço simples da interface do usuário (Wireframe/Layout da Dashboard Web), mostrando onde ficará a tela de vídeo da câmera, os botões de controle de direção e os indicadores visuais do sensor de distância e alertas de inclinação.
     * **Estratégia de Controle Remoto:** Justificativa da escolha do método de comunicação (ex: por que o uso de WebSockets reduzirá o atraso entre o comando do usuário e a resposta física do robô, comparado ao HTTP tradicional).
     * **Modelagem do Payload de Comando:** Definição do formato de string ou caractere enviado pela página ao pressionar cada botão de direção (ex: Comando 'F' para frente, 'B' para trás, 'L' para esquerda, 'R' para direita, 'S' para parar).
+=======
+# IoT Rover
+
+Projeto de um rover controlado por Wi-Fi utilizando um ESP32-S3.
+
+## Funcionalidades
+
+- Controle remoto via interface web
+- Comunicação em tempo real com WebSocket
+- Controle de dois motores DC
+- Operação sem fio por rede Wi-Fi
+
+## Tecnologias
+
+- ESP32-S3
+- PlatformIO
+- C++
+- HTML/CSS/JavaScript
+- WebSocket
+
+## Objetivo
+
+Desenvolver um veículo robótico de baixo custo para estudos de Internet das Coisas (IoT), sistemas embarcados e comunicação sem fio.
+
+## Autor
+
+Layane
+>>>>>>> projeto-final/main
