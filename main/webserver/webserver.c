@@ -100,7 +100,7 @@ static esp_err_t ws_handler(httpd_req_t *req)
 
         int bateria = bateria_percentual();
 
-        char resposta[64];
+        char resposta[128];
         sprintf(resposta, "Velocidade:%d cm/s \n Bateria:%d%% \n IP:%s", velocidade_cm, bateria, ip_addr);
 
         httpd_ws_frame_t ws_res ={

@@ -56,7 +56,7 @@ static void wifi_event_handler(
             "IP obtido: " IPSTR,
             IP2STR(&event->ip_info.ip));
 
-        snprintf(
+        snprintf( 
             ip_addr,
             sizeof(ip_addr),
             IPSTR,
@@ -81,7 +81,7 @@ void wifi_init(void)
     wifi_init_config_t cfg =
         WIFI_INIT_CONFIG_DEFAULT();
 
-    ESP_ERROR_CHECK(
+    ESP_ERROR_CHECK(    
         esp_wifi_init(&cfg)
     );
 
